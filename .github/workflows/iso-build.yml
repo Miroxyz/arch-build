@@ -11,5 +11,7 @@ jobs:
       options: --privileged
     steps:
       - uses: actions/checkout@v3
+      - run: pacman-key --init
+      - run: pacman --noconfirm -Sy archlinux-keyring git
       - run: git clone https://gitlab.archlinux.org/archlinux/archiso.git
       - run: find .
