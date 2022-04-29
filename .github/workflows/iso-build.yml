@@ -12,7 +12,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: pacman-key --init
-      - run: pacman --noconfirm -Sy archlinux-keyring git
+      - run: pacman --noconfirm -Sy archlinux-keyring git archiso
       - run: git clone https://gitlab.archlinux.org/archlinux/archiso.git
       - run: pwd
       - run: find .
+      - run: mkdir -p /tmp/archlive
+      - run: cp -r ./archiso/configs/releng/* /tmp/archlive
+      - run: find /tmp/archlive
+      - run: cd /tmp/archlive;  mkarchiso -v -w work/ -o out/ ./
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Arch Live ISO
+          path: /tmp/archlive/out/*.iso
