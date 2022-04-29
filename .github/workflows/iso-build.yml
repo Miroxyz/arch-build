@@ -14,4 +14,5 @@ jobs:
       - run: pacman-key --init
       - run: pacman --noconfirm -Sy archlinux-keyring git
       - run: git clone https://gitlab.archlinux.org/archlinux/archiso.git
+      - run: pwd
       - run: find .
